@@ -1,6 +1,8 @@
 import { Router, Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { ObavestenjeOUplatama } from "../entity/ObavestenjeOUplatama";
+import { getConnection } from "typeorm";
+import { Radnik } from "../entity/Radnik";
 
 const router = Router();
 

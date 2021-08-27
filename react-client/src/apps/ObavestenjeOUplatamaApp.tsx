@@ -15,27 +15,7 @@ function ObavestenjeOUplatamaApp() {
     let [radnici, setRadnici] = useState([]);
     let [selectedRow, setSelectedRow] = useState<number | null>(null);
     let [error, setError] = useState('');
-    let [alert, setAlert] = useState({
-        type: 'error',
-        text: 'This is a alert message',
-        show: false
-    });
 
-    function onCloseAlert() {
-        setAlert({
-            type: '',
-            text: '',
-            show: false
-        })
-    }
-
-    function onShowAlert(type: any, text: string) {
-        setAlert({
-            type: type,
-            text: text,
-            show: true
-        })
-    }
 
     const getObavestenjaOUplatama = async () => {
         try {
@@ -59,7 +39,6 @@ function ObavestenjeOUplatamaApp() {
         })();
         if (selectedRow !== null) {
             setObavestenjeOUplatama(obavestenjaOUplatama.find((obav: ObavestenjeOUplatama) => obav.idObavestenja === selectedRow)!);
-            console.log(obavestenjeOUplatama?.idObavestenja);
         }
     }, []);
 
@@ -69,7 +48,6 @@ function ObavestenjeOUplatamaApp() {
             if (res.error) setError(res.error);
             else {
                 setObavestenjaOUplatama([...obavestenjaOUplatama, { ...res }]);
-                onShowAlert('success', 'Uspešno ste dodali obaveštenje!');
             }
         } catch (e) {
             setError("Network error.");
@@ -94,7 +72,6 @@ function ObavestenjeOUplatamaApp() {
             if (res.error) setError(res.error);
             else {
                 setObavestenjaOUplatama(obavestenjaOUplatama.map((obav: ObavestenjeOUplatama) => obav.idObavestenja === obavestenjeOUplatama.idObavestenja ? obavestenjeOUplatama : obav));
-                onShowAlert('success', 'Uspešno ste izmenili obaveštenje!');
             }
         } catch (e) {
             setError("Network error.");

@@ -90,6 +90,9 @@ function ObavestenjaOUplatamaForma(props: Props) {
     }
 
     const promeniRadnika = async (r: number) => {
+        if (r === 0) {
+            return
+        }
         const radnik = props.radnici.find(radnik => radnik.sifraRadnika === r);
         setRadnik(radnik!);
         await props.onPromeniRadnika(radnik!.sifraRadnika);
@@ -99,6 +102,13 @@ function ObavestenjaOUplatamaForma(props: Props) {
         e.preventDefault();
         if (datum !== null && svrhaObavestenja !== '' && primalac !== 0 && radnik !== null && idObavHotela !== 0 && idObavOsiguranja !== 0 && idObavPrevoza !== 0) {
             await props.onAdd(new ObavestenjeOUplatama(0, dateToYMD((datum! as Date)), svrhaObavestenja, idObavHotela, idObavPrevoza, idObavOsiguranja, primalac, radnik!));
+            setDatum(new Date());
+            setSvrhaObavestenja('');
+            setIdObavPrevoza(0);
+            setIdObavHotela(0);
+            setIdObavOsiguranja(0);
+            setPrimalac(0);
+            setRadnik(new Radnik(0, ''))
             onShowAlert('success', 'Uspešno ste dodali obaveštenje!');
         } else {
             onShowAlert('warning', `Popunite pravilno sva polja!`);
@@ -112,7 +122,7 @@ function ObavestenjaOUplatamaForma(props: Props) {
 
     const onUpdate = async (e: any) => {
         e.preventDefault();
-        if (datum !== null && svrhaObavestenja !== '' && primalac !== 0 && radnik !== null && idObavHotela !== 0 && idObavOsiguranja !== 0 && idObavPrevoza !== 0) {
+        if (datum !== null && svrhaObavestenja !== '' && primalac !== 0 && radnik?.sifraRadnika !== 0 && idObavHotela !== 0 && idObavOsiguranja !== 0 && idObavPrevoza !== 0) {
             await props.onUpdate(new ObavestenjeOUplatama(props.selectedRow!, dateToYMD((datum! as Date)), svrhaObavestenja, idObavHotela, idObavPrevoza, idObavOsiguranja, primalac, radnik!));
             onShowAlert('success', 'Uspešno ste izmenili obaveštenje!');
         } else {

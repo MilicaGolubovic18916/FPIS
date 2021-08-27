@@ -15,10 +15,9 @@ function ObavestenjaOUplatamaTabela(props: Props) {
         else props.setSelectedRow(id);
     }
 
-    const getImePrezime = (id: Radnik) => {
-        let radnik = props.radnici.find(radnik => radnik.sifraRadnika === id.sifraRadnika);
-        console.log(radnik?.imePrezime);
-        return radnik ? radnik.imePrezime : 'proba';
+    const getImePrezime = (r: Radnik) => {
+        let radnik = props.radnici.find(radnik => radnik.sifraRadnika === r.sifraRadnika);
+        return radnik ? radnik.imePrezime : '';
     }
 
     const getFormattedDatum = (datum: string) => datum.split('T')[0];

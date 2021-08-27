@@ -191,18 +191,20 @@ function RacunSaBrutoCenomApp() {
 
     const onUpdateStavka = async (stavka: StavkaRacunaSaBrutoCenom) => {
 
-        let stavkeRacuna = racun!.stavkeRacuna
+        let stavkeRac = [];
+        let izmenjena = racun!.stavkeRacuna.find((s: StavkaRacunaSaBrutoCenom) => s.rb === stavka.rb)!;
 
-        stavkeRacuna.forEach((stavkaRacuna, i) => {
-            if (stavkaRacuna.rb === stavka.rb) {
-                stavkeRacuna[i] = { ...stavka, status: "Izmenjena" }
-            }
-        })
+        if (izmenjena.status === "Nova") {
+            stavka.status = "Nova";
+            stavkeRac = racun!.stavkeRacuna.map((s: StavkaRacunaSaBrutoCenom) => s.rb === stavka.rb ? stavka : s);
+        } else {
+            stavka.status = "Izmenjena";
+            stavkeRac = racun!.stavkeRacuna.map((s: StavkaRacunaSaBrutoCenom) => s.rb === stavka.rb ? stavka : s);
+        }
 
-
-        let ukupnaBruto = stavkeRacuna.reduce((total, stavka) => total + stavka.brutoCena, 0);
+        let ukupnaBruto = stavkeRac.reduce((total, stavka) => total + stavka.brutoCena, 0);
         let rac = new RacunSaBrutoCenom(racun!.brRacuna, racun!.rokPlacanja, racun!.datumIzdavanja, racun!.osnova, ukupnaBruto, racun!.jmbg,
-            racun!.radnik, racun!.nacinPlacanja, stavkeRacuna);
+            racun!.radnik, racun!.nacinPlacanja, stavkeRac);
         setRacun(rac);
     }
 
@@ -232,6 +234,10 @@ function RacunSaBrutoCenomApp() {
     const onAdd = async () => {
         if (racun!.stavkeRacuna.length === 0) {
             onShowAlert('error', 'Unesite bar jednu stavku.')
+            return;
+        }
+        if (racun!.jmbg === 0 || racun!.osnova === '' || racun!.nacinPlacanja.idNacinPlacanja === 0 || racun?.radnik.sifraRadnika === 0) {
+            onShowAlert('warning', 'Popunite pravilno sva polja');
             return;
         }
         try {
@@ -269,6 +275,14 @@ function RacunSaBrutoCenomApp() {
             onShowAlert('warning', `Racun ${racun!.brRacuna} nema stavki, pa je izbrisan.`)
             onRemove()
             return
+        }
+        if (racun!.stavkeRacuna.length === 0) {
+            onShowAlert('error', 'Unesite bar jednu stavku.')
+            return;
+        }
+        if (racun!.jmbg === 0 || racun!.osnova === '' || racun!.nacinPlacanja.idNacinPlacanja === 0 || racun!.radnik.sifraRadnika === 0) {
+            onShowAlert('warning', 'Popunite pravilno sva polja');
+            return;
         }
 
         try {

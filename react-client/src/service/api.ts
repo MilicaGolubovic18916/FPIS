@@ -16,8 +16,8 @@ export async function getAllRadnici() {
     return await res.json();
 }
 
-export async function addObavestenjeOUplatama(obavestenjaOSvimIzvrsenimUplatama: ObavestenjeOUplatama) {
-    let { idObavestenja, ...obav } = obavestenjaOSvimIzvrsenimUplatama;
+export async function addObavestenjeOUplatama(obavestenjeOSvimIzvrsenimUplatama: ObavestenjeOUplatama) {
+    let { idObavestenja, ...obav } = obavestenjeOSvimIzvrsenimUplatama;
     let res = await fetch(baseURL + "/obavestenjeOUplatama", {
         method: 'POST',
         body: JSON.stringify(obav),

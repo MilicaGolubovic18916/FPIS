@@ -58,6 +58,9 @@ function RacuniForma(props: Props) {
         return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
     }
     const promeniRadnika = async (r: number) => {
+        if (r === 0) {
+            return
+        }
         const radnik = props.radnici.find(radnik => radnik.sifraRadnika === r);
         setRadnik(radnik!);
         await props.onPromeniRadnika(radnik!);
