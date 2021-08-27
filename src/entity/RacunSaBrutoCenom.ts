@@ -21,8 +21,6 @@ export class RacunSaBrutoCenom {
     @Column()
     ukupnaBrutoCena: number;
 
-    // @Column()
-    // idMestoIzdavanja: number;
 
     @Column()
     jmbg: number;
