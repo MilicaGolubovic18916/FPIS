@@ -113,11 +113,6 @@ function StavkeForma(props: Props) {
                     <label className="col-form-label">Marža</label>
                     <input type="number" className="form-control" name="marza" value={marza} onChange={(e) => setMarza(Number(e.target.value))} />
                 </div>
-                {/* <div className="form-group col-md-4">
-                    <label className="col-form-label">Bruto cena</label>
-                    <input type="text" className="form-control" name="brutoCena" value={brutoCena} onChange={(e) => setBrutoCena(Number(e.target.value))} readOnly />
-                </div> */}
-
             </div>
             <div className="form-row">
                 <div className="col-md-4">

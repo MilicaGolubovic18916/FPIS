@@ -19,7 +19,6 @@ function RacunSaBrutoCenomApp() {
     let [racun, setRacun] = useState<RacunSaBrutoCenom | null>(null);
     let [radnici, setRadnici] = useState([]);
     let [naciniPlacanja, setNaciniPlacanja] = useState([]);
-    let [stavkeObrisane, setStavkeObrisane] = useState<StavkaRacunaSaBrutoCenom[]>([]);
     let [selectedRowRac, setSelectedRowRac] = useState<number | null>(null);
     let [selectedRowStavka, setSelectedRowStavka] = useState<number | null>(null);
     let [error, setError] = useState('');
@@ -89,7 +88,6 @@ function RacunSaBrutoCenomApp() {
             setSelectedRowStavka(null);
         } else {
             setRacun(new RacunSaBrutoCenom(0, dateToYMD(new Date()), dateToYMD(new Date()), '', 0, 0, new Radnik(0, ''), new NacinPlacanja(0, ''), []));
-            setStavkeObrisane([]);
             setSelectedRowStavka(null);
         }
     }, [selectedRowRac]);
@@ -240,6 +238,10 @@ function RacunSaBrutoCenomApp() {
             onShowAlert('warning', 'Popunite pravilno sva polja');
             return;
         }
+        if (racun!.datumIzdavanja > racun!.rokPlacanja) {
+            onShowAlert('warning', 'Datum izdavanja mora biti pre roka plaćanja.');
+            return;
+        }
         try {
             let res = await addRacun(racun!);
             if (res.error) {
@@ -272,8 +274,8 @@ function RacunSaBrutoCenomApp() {
             }
         })
         if (racun!.stavkeRacuna.length - brObrisanih + brDodatih === 0) {
-            onShowAlert('warning', `Racun ${racun!.brRacuna} nema stavki, pa je izbrisan.`)
             onRemove()
+            onShowAlert('warning', `Racun ${racun!.brRacuna} nema stavki, pa je izbrisan.`)
             return
         }
         if (racun!.stavkeRacuna.length === 0) {
@@ -284,9 +286,12 @@ function RacunSaBrutoCenomApp() {
             onShowAlert('warning', 'Popunite pravilno sva polja');
             return;
         }
+        if (racun!.datumIzdavanja > racun!.rokPlacanja) {
+            onShowAlert('warning', 'Datum izdavanja mora biti pre roka plaćanja.');
+            return;
+        }
 
         try {
-            //racun!.stavkeRacuna = [...stavkeObrisane, ...racun!.stavkeRacuna];
 
             let res = await updateRacun(racun!);
             if (res.error) {
@@ -322,7 +327,6 @@ function RacunSaBrutoCenomApp() {
             <div className="container">
                 <h1 className="display-4">Računi</h1>
                 <div className="row">
-                    {/* {error && <h1>{error}</h1>} */}
                     <RacunSaBrutoCenomTabela
                         racuni={racuni}
                         radnici={radnici}

@@ -132,10 +132,6 @@ function RacuniForma(props: Props) {
                     <label className="col-form-label">Osnova</label>
                     <input type="text" className="form-control" name="osnova" value={osnova} onChange={(e) => promeniOsnova(e.target.value)} />
                 </div>
-                {/* <div className="form-group col-md-4">
-                    <label className="col-form-label">Ukupna bruto cena</label>
-                    <input type="text" className="form-control" name="ukupnaBrutoCena" value={ukupnaBrutoCena} onChange={(e) => setUkupnaBrutoCena(Number(e.target.value))} readOnly />
-                </div> */}
                 <div className="form-group col-md-4">
                     <label className="col-form-label">Radnik</label>
                     <select className="custom-select form-control" name="radnik" value={radnik?.sifraRadnika} onChange={(e) => promeniRadnika(Number(e.target.value))}>

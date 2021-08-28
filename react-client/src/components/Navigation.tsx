@@ -21,7 +21,7 @@ const Navigation = (props: { location: { pathname: string; }; }) => (
                             </Link>
                         </li>
                         <li
-                            className={`nav-item  ${props.location.pathname === "obavestenjeOUplatama" ? "active" : ""
+                            className={`nav-item  ${props.location.pathname === "obavestenjaOUplatama" ? "active" : ""
                                 }`}
                         >
                             <Link className="nav-link" to="/obavestenjaOUplatama">
