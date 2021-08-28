@@ -234,7 +234,7 @@ function RacunSaBrutoCenomApp() {
             onShowAlert('error', 'Unesite bar jednu stavku.')
             return;
         }
-        if (racun!.jmbg === 0 || racun!.osnova === '' || racun!.nacinPlacanja.idNacinPlacanja === 0 || racun?.radnik.sifraRadnika === 0) {
+        if (racun!.jmbg === 0 || racun!.osnova === '' || racun?.nacinPlacanja.idNacinPlacanja === 0 || racun?.radnik.sifraRadnika === 0) {
             onShowAlert('warning', 'Popunite pravilno sva polja');
             return;
         }
@@ -287,7 +287,7 @@ function RacunSaBrutoCenomApp() {
             return;
         }
         if (racun!.datumIzdavanja > racun!.rokPlacanja) {
-            onShowAlert('warning', 'Datum izdavanja mora biti pre roka plaćanja.');
+            onShowAlert('warning', 'Datum izdavanja mora biti pre roka plaćanja ili isti dan.');
             return;
         }
 

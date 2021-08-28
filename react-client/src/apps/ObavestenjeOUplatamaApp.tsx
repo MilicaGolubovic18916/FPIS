@@ -44,6 +44,7 @@ function ObavestenjeOUplatamaApp() {
 
     const onAdd = async (obavestenjeOUplatama: ObavestenjeOUplatama) => {
         try {
+
             let res = await addObavestenjeOUplatama(obavestenjeOUplatama);
             if (res.error) setError(res.error);
             else {

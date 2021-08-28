@@ -67,6 +67,9 @@ function RacuniForma(props: Props) {
     }
 
     const promeniNacinPlacanja = async (np: number) => {
+        if (np === 0) {
+            return
+        }
         const nacinPlacanja = props.naciniPlacanja.find((nacin: NacinPlacanja) => nacin.idNacinPlacanja === np);
         setNacinPlacanja(nacinPlacanja);
         await props.onPromeniNacinPlacanja(nacinPlacanja!);

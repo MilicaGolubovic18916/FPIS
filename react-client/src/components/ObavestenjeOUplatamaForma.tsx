@@ -100,7 +100,7 @@ function ObavestenjaOUplatamaForma(props: Props) {
 
     const onAdd = async (e: any) => {
         e.preventDefault();
-        if (datum !== null && svrhaObavestenja !== '' && primalac !== 0 && radnik !== null && idObavHotela !== 0 && idObavOsiguranja !== 0 && idObavPrevoza !== 0) {
+        if (datum !== null && svrhaObavestenja !== '' && primalac !== 0 && radnik?.sifraRadnika !== 0 && idObavHotela !== 0 && idObavOsiguranja !== 0 && idObavPrevoza !== 0) {
             await props.onAdd(new ObavestenjeOUplatama(0, dateToYMD((datum! as Date)), svrhaObavestenja, idObavHotela, idObavPrevoza, idObavOsiguranja, primalac, radnik!));
             setDatum(new Date());
             setSvrhaObavestenja('');
