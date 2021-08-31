@@ -124,8 +124,7 @@ router.delete("/:id", async (req: Request, res: Response) => {
 
 //insert one
 router.post("/", async (req: Request, res: Response) => {
-    console.log("ok");
-    console.log(req.body);
+
     const connection = getConnection();
     const queryRunner = connection.createQueryRunner();
     await queryRunner.connect();

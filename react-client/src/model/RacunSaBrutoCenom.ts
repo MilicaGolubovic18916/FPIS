@@ -9,13 +9,9 @@ export class RacunSaBrutoCenom {
     datumIzdavanja: string;
     osnova: string;
     ukupnaBrutoCena: number;
-    // idMestoIzdavanja: number;
     jmbg: number;
     nacinPlacanja: NacinPlacanja;
-    // brRacunaOsiguranja: number;
     radnik: Radnik;
-    // brFakture: number;
-    // brProfakture: number;
     stavkeRacuna: StavkaRacunaSaBrutoCenom[];
 
     constructor(brRacuna: number, rokPlacanja: string, datumIzdavanja: string, osnova: string, ukupnaBrutoCena: number,

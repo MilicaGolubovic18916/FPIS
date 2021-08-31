@@ -66,8 +66,6 @@ function StavkeForma(props: Props) {
             let s = new StavkaRacunaSaBrutoCenom(maxID + 1, props.racun!.brRacuna, nazivStavke, netoCena, marza, netoCena + netoCena * (marza / 100));
             await props.onAdd(s);
         } else if (netoCena === 0 || netoCena < 0 || marza < 0) {
-            console.log(netoCena);
-            console.log(marza);
             onShowAlert('warning', `Neto cena i marža moraju biti pozitivni brojevi, pri čemu marža može biti i 0.`);
         } else {
             onShowAlert('warning', `Morate uneti naziv stavke.`);
